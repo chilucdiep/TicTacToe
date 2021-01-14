@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@700&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+body {
+    margin: 0;
+    background-color: #f9dcc4;
+    font-family: 'Bodoni Moda', serif;
+}
+
+h1 {
+    text-align: center;
+    color: #f08080;
+    margin-bottom: 0;
+    font-size: 48px;
+}
+
+.board {
+    width: 100vw;
+    height: 70vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 9px;
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: #f8edeb;
+    border-radius: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+
+    /* box-shadow: 
+    -10px -10px 15px rgba(255, 255, 255, 0.5),
+    10px 10px 15px rgba(70, 70, 70, 0.12),
+    inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+    inset 10px 10px 15px rgba(70, 70, 70, 0.12); */
+}
+
+.cell.x, .cell.o {
+    cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+    content: '';
+    width: calc(var(--mark-size) * 0.1);
+    height: var(--mark-size);
+    border-radius: 10px;
+    background-color: #ffb5a7;
+    position: absolute;
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+    background-color: #fadbd3;
+}
+
+.cell.x.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+    transform: rotate(-45deg);
+}
+
+.cell.o::before,
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+}
+
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+    background-color: #ffb5a7;
+    height: calc(var(--mark-size)*.9);
+    width: calc(var(--mark-size)*.9);
+}
+
+.board.o .cell:not(.x):not(.o):hover::before {
+    background-color: #fadbd3;
+}
+
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after {
+    height: calc(var(--mark-size)*.7);
+    width: calc(var(--mark-size)*.7);
+    background-color: #f8edeb;
+}
+
+.winning-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    background-color: rgba(180, 142, 110, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #f8edeb;
+    font-size: 4rem;
+}
+
+.winning-message button {
+    margin-top: 2em;
+    font-size: 1.5rem;
+    background-color: #fec89a;
+    color: #3f342a;
+    padding: 1rem 4rem;
+    border: none;
+    border-radius: 5em;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.winning-message button:hover {
+    opacity: 0.8;
+}
+
+.winning-message.show {
+    display: flex;
+}
