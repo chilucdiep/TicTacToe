@@ -16,6 +16,11 @@ const winningMessageElement = document.getElementById('winningMessage')
 const winningMessageTextElement = document.querySelector(".winning-message-text")
 const replayButton = document.getElementById('replayButton')
 let oTurn
+const xDisplay = document.getElementById('xDisplay')
+const oDisplay = document.getElementById('oDisplay')
+let xScore = 0
+let oScore = 0
+
 
 startGame()
 
@@ -55,6 +60,13 @@ function endGame(draw) {
         winningMessageTextElement.innerText = 'Draw!'
     } else {
         winningMessageTextElement.innerText = `${oTurn ? "O's": "X's"} Wins!`
+        if (oTurn == true) {
+            oScore += 1
+            oDisplay.textContent = oScore
+        } else {
+            xScore +=1
+            xDisplay.textContent = xScore
+        }
     }
     winningMessageElement.classList.add('show')
 }
